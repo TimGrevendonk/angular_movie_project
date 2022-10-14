@@ -1,0 +1,39 @@
+nav ul {
+  font-size: 1.5rem;
+  align-self: center;
+}
+
+nav a:hover img {
+  animation: playbutton 1s ease-in-out ;
+}
+
+nav li a {
+  transition: 0.5s ease-in-out;
+  border-radius: 0.3rem;
+  padding: 1rem;
+  outline: none rgb(250 204 21);
+}
+
+nav li:hover a {
+  transform: translate(-0.3rem, -0.3rem);
+  box-shadow: 0.3rem 0.3rem 0 rgb(250 204 21);
+  outline: solid 1px rgb(250 204 21) !important;
+}
+nav li:active a {
+  background: rgb(250 204 21);
+  color: black;
+  transition: 0.01s;
+}
+
+
+nav a.active {
+  outline: dashed 1px rgb(250 204 21) !important;
+}
+
+@keyframes playbutton {
+  0%  {    transform: rotate(0deg); }
+  60% {    transform: rotate(360deg); }
+  70% {    transform: scale(1.1); }
+  80% {    transform: translate(0.3rem, 0);}
+  100%{    transform: translate(0, 0); }
+}

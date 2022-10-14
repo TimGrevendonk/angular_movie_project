@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-soothYellow: 250 204 21;
+}
+
 /* nav ul {
   align-items: center;
 }

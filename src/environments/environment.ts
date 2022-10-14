@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false
+  // apiKey : ""
 };
+
+// to call the key inside your services.
+// api = environment.apiKey;
 
 /*
  * For easier debugging in development mode, you can import the following file
