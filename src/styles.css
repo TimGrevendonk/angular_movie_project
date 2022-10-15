@@ -2,16 +2,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import '~hamburgers/_sass/hamburgers/hamburgers.scss';
 
 :root {
   --color-soothYellow: 250 204 21;
 }
 
-/* nav ul {
-  align-items: center;
+body {
+  background: grey;
 }
-
-nav ul li {
-  border: 1px solid black;
-  border-radius: 3px;
-} */

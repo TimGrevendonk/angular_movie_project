@@ -1,21 +1,33 @@
-<nav class="border-gray-100 px-2 sm:px-4 py-2.5 bg-black">
-  <div class="container flex flex-wrap justify-between items-center mx-auto">
-    <a routerLink="/" class="flex items-center">
-        <img src="../../../assets/icons/play_arrow.svg" class="mr-3 h-6 sm:h-9" alt="movies logo" />
-        <span class="self-center text-xl font-semibold whitespace-nowrap text-yellow-400">MovieZ</span>
+<nav class="px-2 sm:px-4 border-soothYellow border-b-2 pt-1 bg-black">
+  <div class="container flex flex-wrap md:justify-center justify-between items-center mx-auto">
+    <a routerLink="/" class="flex items-center group p-4">
+        <img src="../../../assets/icons/play_arrow.svg" class="group-hover:animate-spinout mr-3 h-6 sm:h-9" alt="movies logo" />
+        <span class="self-center text-xl font-semibold whitespace-nowrap text-soothYellow">MovieZ</span>
     </a>
-    <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
-      <span class="sr-only">Open main menu</span>
-      <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+    <button (click)="toggleHamburger()" data-collapse-toggle="navbar-default" type="button" 
+      class="md:hidden hover:outline outline-1 outline-soothYellow group rounded active:bg-soothYellow"
+      aria-controls="navbar-default" aria-expanded="false">
+      <div class="space-y-1 m-2">
+        <div class="rounded w-6 h-1 bg-soothYellow group-active:bg-black"></div>
+        <div class="rounded w-6 h-1 bg-soothYellow group-active:bg-black"></div>
+        <div class="rounded w-6 h-1 bg-soothYellow group-active:bg-black"></div>
+      </div>
     </button>
-    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-      <ul class="flex flex-col p-4 mt-4 bg-black rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0">
-        <li>
-          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="block py-2 pr-4 pl-3 text-yellow-400">Browse</a>
+    <!-- <button data-collapse-toggle="top-navbar" type="button"  class="hover:outline-soothYellow hover:outline hover:outline-1 inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden focus:outline-soothYellow focus:ring-2" aria-controls="navbar-default" aria-expanded="false">
+      <span class="sr-only">Open main menu</span>
+      <svg class="w-6 h-6" aria-hidden="true" fill="rgb(250 204 21)" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+    </button> -->
+    <div [hidden]="!hamburgerOpen" class="md:visible w-full md:block md:w-auto" id="navbar-default">
+      <ul class="flex flex-col p-4 mt-4 bg-black rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0">
+        <li class="popout pt-2">
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="onHamburgerItemClick()" class="rounded-md outline-soothYellow text-lg block py-2 pr-4 pl-3 text-soothYellow">Browse</a>
         </li>
-        <li>
-          <a routerLink="watchlist" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="block py-2 pr-4 pl-3 text-yellow-400">personal</a>
+        <li class="popout pt-2">
+          <a routerLink="watchlist" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="onHamburgerItemClick()" class="rounded-md outline-soothYellow text-lg block py-2 pr-4 pl-3 text-soothYellow">Personal</a>
           <!-- <a routerLink="watchlist" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">personal</a> -->
+        </li>
+        <li class="popout pt-2">
+          <a routerLink="searchlist" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="onHamburgerItemClick()"class="rounded-md outline-soothYellow text-lg block py-2 pr-4 pl-3 text-soothYellow">Search</a>
         </li>
       </ul>
     </div>
