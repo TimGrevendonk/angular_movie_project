@@ -11,7 +11,6 @@ import { Movie } from '../../../core/models/movie';
   styleUrls: ['./popular-movies.component.css']
 })
 export class PopularMoviesComponent implements OnInit {
-  // popularMovies!: Movie[];
   popularMovies!: Movie[];
   popularMovies$: Subscription = new Subscription();
 
@@ -22,25 +21,19 @@ export class PopularMoviesComponent implements OnInit {
   ngOnInit(): void {
     this.getPopularMovies();
   }
-  // ngOnDestroy(): void {
-  //   this.popularMovies$.unsubscribe();
-  // }
+  // Unsubscibe from subscriptio when the element is destroyed.
+  ngOnDestroy(): void {
+    this.popularMovies$.unsubscribe();
+  }
 
   // Query popular movie sfrom the movieDB and subscribe to it.
   getPopularMovies(){
-    // this.popularMovies$ = this.movieService.getPopularMovies().subscribe(result => this.popularMovies = result)
-    // this.popularMovies$ = this.movieService.getPopularMovies();
-
-    this.popularMovies$ = this.movieService.getPopularMovies().subscribe((r:any) => {
+    this.popularMovies$ = this.movieService.getPopularMovies().subscribe(
+      (r:any) => {
       this.popularMovies = r.results,
       console.log("r",r.results);
-
     }
     )
-
-
-
-    console.log("popularMovies:", this.popularMovies);
   }
 
 }

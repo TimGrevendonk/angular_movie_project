@@ -5,5 +5,5 @@
   <!-- <app-movie *ngFor="let movie of popularMovies">
     {{ movie }}
   </app-movie> -->
-  <div *ngFor="let movie of popularMovies" class="outline outline-1 outline-soothYellow">{{ movie.title }}</div>
+  <app-movie *ngFor="let movie of popularMovies" [movie]="popularMovies" class="outline outline-1 outline-soothYellow"></app-movie>
 </div>

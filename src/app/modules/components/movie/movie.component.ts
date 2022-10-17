@@ -9,7 +9,7 @@ import { MovieService } from 'src/app/core/services/movie.service';
   styleUrls: ['./movie.component.css']
 })
 export class MovieComponent implements OnInit {
-  // movie: Movie = { id: 2, title: "", overview: "", release_date: "", genre_ids: []};
+  @Input() movie!: Movie[];
   isDetail: boolean = false;
 
   constructor(private movieService: MovieService, private router: Router) { }
