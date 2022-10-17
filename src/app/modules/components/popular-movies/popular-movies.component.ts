@@ -11,13 +11,14 @@ import { Movie } from '../../../core/models/movie';
   styleUrls: ['./popular-movies.component.css']
 })
 export class PopularMoviesComponent implements OnInit {
-  // popularMovies: Movie[] = [];
-  popularMovies: Movie[] = [];
-  popularMovies$: Observable<Movie[]> = new Observable<Movie[]>();
+  // popularMovies!: Movie[];
+  popularMovies!: Movie[];
+  popularMovies$: Subscription = new Subscription();
 
   constructor(private movieService : MovieService, private router: Router) {
+
   }
-  // Initialize the component and load the popular movies.
+  // Initialize the component and load in the popular movies.
   ngOnInit(): void {
     this.getPopularMovies();
   }
@@ -28,7 +29,17 @@ export class PopularMoviesComponent implements OnInit {
   // Query popular movie sfrom the movieDB and subscribe to it.
   getPopularMovies(){
     // this.popularMovies$ = this.movieService.getPopularMovies().subscribe(result => this.popularMovies = result)
-    this.popularMovies$ = this.movieService.getPopularMovies();
+    // this.popularMovies$ = this.movieService.getPopularMovies();
+
+    this.popularMovies$ = this.movieService.getPopularMovies().subscribe((r:any) => {
+      this.popularMovies = r.results,
+      console.log("r",r.results);
+
+    }
+    )
+
+
+
     console.log("popularMovies:", this.popularMovies);
   }
 

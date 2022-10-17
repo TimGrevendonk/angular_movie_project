@@ -9,8 +9,8 @@ import { MovieService } from 'src/app/core/services/movie.service';
   styleUrls: ['./movie.component.css']
 })
 export class MovieComponent implements OnInit {
-  @Input() movie: Movie = { id: 0, title: "", overview: "", release_date: "", genre_ids: []};
-  @Input() isDetail: boolean = false;
+  // movie: Movie = { id: 2, title: "", overview: "", release_date: "", genre_ids: []};
+  isDetail: boolean = false;
 
   constructor(private movieService: MovieService, private router: Router) { }
 
@@ -18,7 +18,7 @@ export class MovieComponent implements OnInit {
   }
 
   detail(id: number) {
-    this.router.navigate(["/article", id]);
+    this.router.navigate(["/movie", id]);
   }
 
 }
