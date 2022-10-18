@@ -9,10 +9,11 @@ import { MovieService } from 'src/app/core/services/movie.service';
   styleUrls: ['./movie.component.css']
 })
 export class MovieComponent implements OnInit {
-  @Input() movie!: Movie[];
+  @Input() movies!: Movie[];
   isDetail: boolean = false;
 
-  constructor(private movieService: MovieService, private router: Router) { }
+  constructor(private movieService: MovieService, private router: Router) {
+  }
 
   ngOnInit(): void {
   }

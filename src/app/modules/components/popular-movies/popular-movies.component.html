@@ -1,9 +1,7 @@
 <p>popular-movies works!</p>
-<p>but the movies do not load in yet, need fix do actually make the JSON into Movie objects.</p>
-<div clas="flex no-wrap">
-  <!-- <div *ngFor="let movie of (popularMovies$ | async)"> -->
-  <!-- <app-movie *ngFor="let movie of popularMovies">
-    {{ movie }}
-  </app-movie> -->
-  <app-movie *ngFor="let movie of popularMovies" [movie]="popularMovies" class="outline outline-1 outline-soothYellow"></app-movie>
-</div>
+<!-- <div *ngFor="let movie of (popularMovies$ | async)"> -->
+<!-- <app-movie *ngFor="let movie of popularMovies">
+  {{ movie }}
+</app-movie> -->
+<app-movie [movies]="popularMovies" class="md:flex md:flex-no-wrap w-full overflow-x-auto outline outline-1 outline-soothYellow"></app-movie>
+

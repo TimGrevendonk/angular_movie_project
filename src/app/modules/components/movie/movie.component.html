@@ -1,14 +1,20 @@
-<p>movie works!</p>
-<!-- <div class="outline outline-1 outline-soothYellow">
+<div *ngIF="!movie">
+  <p>no movies found.</p>
+</div>
+
+<div *ngFor="let movie of movies" class="w-full flex-none outline outline-1 outline-soothYellow p-2">
+  <img [src]="movie.poster_path" [alt]="movie.title">
   <ul>
     <li>{{ movie.id }}</li>
     <li>{{ movie.title }}</li>
   </ul>
-  <button (click)="detail(movie.id)" class="rounded bg-soothYellow m-2 p-1 active:bg-black active:text-soothYellow">show more</button>
-  <div *ngIf="!isDetail">
-      {{ movie.overview | snubText : 50 }}
+  <div class="flex">
+    <div *ngIf="!isDetail">
+        {{ movie.overview | snubText : 50 }}
+    </div>
+    <div *ngIF="isDetail">
+        {{ movie.overview }}
+    </div>
   </div>
-  <div *ngIF="isDetail">
-      {{ movie.overview }}
-  </div>
-</div> -->
+  <button (click)="detail(movie.id)" class="w-full rounded bg-soothYellow mt-2 p-1 active:bg-black active:text-soothYellow">show more</button>
+</div>
