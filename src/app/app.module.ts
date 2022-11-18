@@ -3,36 +3,44 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomepageComponent } from './modules/pages/homepage/homepage.component';
-import { WatchlistComponent } from './modules/pages/watchlist/watchlist.component';
-import { SearchlistComponent } from './modules/pages/searchlist/searchlist.component';
+import { HomepageComponent } from './pages/homepage/homepage.component';
+import { WatchlistComponent } from './watchlist/watchlist.component';
+import { SearchlistComponent } from './pages/searchlist/searchlist.component';
 import { NavigationbarComponent } from './shared/navigationbar/navigationbar.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { MovieComponent } from './modules/components/movie/movie.component';
-import { PopularMoviesComponent } from './modules/components/popular-movies/popular-movies.component';
-import { MovieDetailComponent } from './modules/pages/movie-detail/movie-detail.component';
-import { SnubTextPipe } from './core/pipes/snub-text.pipe';
+import { MovieComponent } from './shared/movie/movie.component';
+import { MovieListComponent } from './shared/movie-list/movie-list.component';
+import { MovieDetailComponent } from './pages/movie-detail/movie-detail.component';
+import { SnubTextPipe } from './shared/pipes/snub-text.pipe';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from './shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { WatchlistModule } from './watchlist/watchlist.module';
+// import { MovieModule } from './modules/movie/movie.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    WatchlistComponent,
     HomepageComponent,
-    NavigationbarComponent,
     SearchlistComponent,
     MovieComponent,
-    PopularMoviesComponent,
+    MovieListComponent,
     MovieDetailComponent,
     SnubTextPipe
+    // say here what modules to "attach" to this module.
+    // MovieModule
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    SharedModule
+  ],
+  exports: [
   ],
   providers: [],
   bootstrap: [AppComponent]
