@@ -11,37 +11,31 @@ import { SnubTextPipe } from './pipes/snub-text.pipe';
 import { AppRoutingModule } from '../app-routing.module';
 import { SharedRoutingModule } from './shared-routing.module';
 import { WatchlistRoutingModule } from '../watchlist/watchlist-routing.module';
+import { ButtonComponent } from './button/button.component';
 
 
 
 @NgModule({
   declarations: [
-    // MovieComponent,
-    // FooterComponent,
-    NavigationbarComponent
-    // SnubTextPipe,
-    // MovieComponent,
+    MovieComponent,
+    FooterComponent,
+    NavigationbarComponent,
+    ButtonComponent,
+    SnubTextPipe,
+    MovieComponent
     // MovieListComponent,
   ],
   imports: [
     AppRoutingModule,
     CommonModule
-    // HttpClientModule,
-    // AppRoutingModule,
-    // FormsModule,
-    // ReactiveFormsModule,
-    // SharedRoutingModule,
   ],
   exports: [
-    // CommonModule,
-    // HttpClientModule,
-    // FormsModule,
-    // MovieComponent,
-    // FooterComponent,
-    NavigationbarComponent
-    // SnubTextPipe,
-    // MovieComponent,
-    // MovieListComponent,
+    FooterComponent,
+    NavigationbarComponent,
+    ButtonComponent,
+    MovieComponent,
+    SnubTextPipe,
+    MovieComponent,
   ]
 })
 export class SharedModule { }

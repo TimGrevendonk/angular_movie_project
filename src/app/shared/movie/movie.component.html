@@ -1,4 +1,4 @@
-<div *ngIF="!movie">
+<div *ngIf="!movies">
   <p>no movies found.</p>
 </div>
 
@@ -19,7 +19,7 @@
   <button (click)="detail(movie.id)" class="w-full rounded bg-soothYellow mt-2 p-1 active:bg-black active:text-soothYellow">show more</button>
 </div> -->
 
-<div *ngFor="let movie of movies" class="relative flex-none outline outline-1 outline-soothYellow bg-black">
+<div *ngFor="let movie of movies" (click)="detail(movie.id)" class="hover:cursor-pointer relative flex-none outline outline-1 outline-soothYellow bg-black">
   <img src="https://image.tmdb.org/t/p/original{{movie.backdrop_path}}" [alt]="movie.title"
   class="md:max-w-md">
   <div class="absolute w-full top-0 bg-black opacity-70 text-white text-center">
@@ -29,9 +29,6 @@
     </p>
   </div>
   <div class="bg-black">
-    <button (click)="detail(movie.id)"
-    class="absolute bottom-0 w-full bg-soothYellow py-1 md:py-2 active:bg-black active:text-soothYellow">
-      show more
-    </button>
+    <app-button></app-button>
   </div>
 </div>

@@ -11,29 +11,53 @@ import { Movie } from '../../core/models/movie';
   styleUrls: ['./movie-list.component.css']
 })
 export class MovieListComponent implements OnInit {
+  @Input() listType!: String;
   movieList!: Movie[];
-  popularMovies$: Subscription = new Subscription();
+  Movies$: Subscription = new Subscription();
 
   constructor(private movieService : MovieService, private router: Router) {
 
   }
   // Initialize the component and load in the popularMovies list.
   ngOnInit(): void {
-    this.getPopularMovies();
+    switch (this.listType) {
+      case "popularMovies":
+        this.getPopularMovies();
+        break;
+      case "now playing":
+        this.getPlayingMovies();
+        break;
+      default:
+        this.getPopularMovies();
+    }
+
   }
   // Unsubscibe from subscriptio when the element is destroyed.
   ngOnDestroy(): void {
-    this.popularMovies$.unsubscribe();
+    this.Movies$.unsubscribe();
+  }
+
+  // shuffle the list so it does not look ike there are duplicates (visually).
+  shuffleList(movieList: Movie[]){
+    return movieList.sort(() => Math.random() - 0.5);
   }
 
   // Query popular movies from the movieDB and subscribe to it.
   getPopularMovies(){
-    this.popularMovies$ = this.movieService.getPopularMovies().subscribe(
+    this.Movies$ = this.movieService.getPopularMovies().subscribe(
       (r:any) => {
-      this.movieList = r.results,
-      console.log("r",r.results);
+      this.movieList = r.results;
     }
     )
   }
+
+    // Query popular movies from the movieDB and subscribe to it.
+    getPlayingMovies(){
+      this.Movies$ = this.movieService.getPlayingMovies().subscribe(
+        (r:any) => {
+        this.movieList = this.shuffleList(r.results);
+      }
+      )
+    }
 
 }

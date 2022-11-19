@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
-import { SearchlistComponent } from './pages/searchlist/searchlist.component';
+import { SearchlistComponent } from './searchlist/searchlist.component';
 import { NavigationbarComponent } from './shared/navigationbar/navigationbar.component';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -25,11 +25,8 @@ import { WatchlistModule } from './watchlist/watchlist.module';
   declarations: [
     AppComponent,
     HomepageComponent,
-    SearchlistComponent,
-    MovieComponent,
     MovieListComponent,
-    MovieDetailComponent,
-    SnubTextPipe
+    MovieDetailComponent
     // say here what modules to "attach" to this module.
     // MovieModule
   ],

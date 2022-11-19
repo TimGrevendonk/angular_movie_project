@@ -1,0 +1,11 @@
+/* Track */
+body::-webkit-scrollbar-track {
+  background: pink;
+  color: pink;
+}
+
+/* Handle */
+body::-webkit-scrollbar-thumb {
+  background: red;
+  border-radius: 10px;
+}
