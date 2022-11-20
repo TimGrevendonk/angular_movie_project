@@ -1,7 +1,7 @@
-<h3 class="flex justify-center md:justify-start md:p-2 text-3xl sooth text-soothYellow outline outline-1">{{listType}}</h3>
-<!-- <div *ngFor="let movie of (popularMovies$ | async)"> -->
-<!-- <app-movie *ngFor="let movie of popularMovies">
-  {{ movie }}
-</app-movie> -->
-<app-movie [movies]="movieList"  class="md:flex md:flex-no-wrap w-full overflow-x-auto outline outline-1 outline-soothYellow"></app-movie>
+<h3 class="flex justify-center md:justify-start p-5 text-3xl sooth text-soothYellow outline outline-1">{{listType}}</h3>
+
+<app-movie [movies]="movieList"
+  class="scrollbar scrollbar-thumb-soothYellow scrollbar-track-black
+  md:flex md:flex-no-wrap w-full overflow-x-auto outline outline-1 outline-soothYellow"
+></app-movie>
 

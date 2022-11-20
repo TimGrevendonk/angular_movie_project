@@ -1,3 +1,4 @@
+import { TagContentType } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
@@ -27,11 +28,15 @@ export class MovieListComponent implements OnInit {
       case "now playing":
         this.getPlayingMovies();
         break;
+      case "top rated":
+        this.getTopRatedMovies();
+        break;
       default:
         this.getPopularMovies();
     }
 
   }
+
   // Unsubscibe from subscriptio when the element is destroyed.
   ngOnDestroy(): void {
     this.Movies$.unsubscribe();
@@ -51,13 +56,22 @@ export class MovieListComponent implements OnInit {
     )
   }
 
-    // Query popular movies from the movieDB and subscribe to it.
-    getPlayingMovies(){
-      this.Movies$ = this.movieService.getPlayingMovies().subscribe(
-        (r:any) => {
-        this.movieList = this.shuffleList(r.results);
-      }
-      )
+  // Query popular movies from the movieDB and subscribe to it.
+  getPlayingMovies(){
+    this.Movies$ = this.movieService.getPlayingMovies().subscribe(
+      (r:any) => {
+      this.movieList = this.shuffleList(r.results);
     }
+    )
+  }
+
+  // Query popular movies from the movieDB and subscribe to it.
+  getTopRatedMovies(){
+    this.Movies$ = this.movieService.getTopRatedMovies().subscribe(
+      (r:any) => {
+      this.movieList = this.shuffleList(r.results);
+    }
+    )
+  }
 
 }

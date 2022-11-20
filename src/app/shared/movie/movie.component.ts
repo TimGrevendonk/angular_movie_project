@@ -18,7 +18,8 @@ export class MovieComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  detail(id: number) {
+  detail = (event:any, id: number) => {
+    event.stopPropagation();
     this.router.navigate(["/movie", id]);
   }
 

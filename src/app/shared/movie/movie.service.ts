@@ -23,6 +23,10 @@ export class MovieService {
     return this.httpClient.get<Movie[]>("https://api.themoviedb.org/3/movie/now_playing?api_key=" + environment.apiKey);
   }
 
+  getTopRatedMovies(): Observable<Movie[]> {
+    return this.httpClient.get<Movie[]>("https://api.themoviedb.org/3/movie/top_rated?api_key=" + environment.apiKey);
+  }
+
   getMovieById(id: number): Observable<Movie> {
     return this.httpClient.get<Movie>("https://api.themoviedb.org/3/movie/" + id + "?api_key=" + environment.apiKey);
   }

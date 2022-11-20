@@ -35,7 +35,7 @@ import { WatchlistModule } from './watchlist/watchlist.module';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    SharedModule
+    SharedModule,
   ],
   exports: [
   ],
