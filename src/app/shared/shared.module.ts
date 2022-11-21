@@ -12,7 +12,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { SharedRoutingModule } from './shared-routing.module';
 import { WatchlistRoutingModule } from '../watchlist/watchlist-routing.module';
 import { ButtonComponent } from './button/button.component';
-import { FormfieldComponent } from './formfield/formfield.component';
+import { SearchformComponent } from './searchform/searchform.component';
 
 
 
@@ -23,13 +23,16 @@ import { FormfieldComponent } from './formfield/formfield.component';
     NavigationbarComponent,
     ButtonComponent,
     SnubTextPipe,
+    SearchformComponent,
     MovieComponent,
-    FormfieldComponent
-    // MovieListComponent,
+    SearchformComponent,
+        // MovieListComponent,
   ],
   imports: [
-    AppRoutingModule,
-    CommonModule
+    FormsModule,
+    SharedRoutingModule,
+    CommonModule,
+    // FormfieldComponent,
   ],
   exports: [
     FooterComponent,
@@ -38,7 +41,9 @@ import { FormfieldComponent } from './formfield/formfield.component';
     MovieComponent,
     SnubTextPipe,
     MovieComponent,
-    FormfieldComponent,
+    SearchformComponent,
+    FormsModule,
+    // FormfieldComponent
   ]
 })
 export class SharedModule { }

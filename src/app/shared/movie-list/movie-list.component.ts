@@ -31,6 +31,9 @@ export class MovieListComponent implements OnInit {
       case "top rated":
         this.getTopRatedMovies();
         break;
+      case "trending":
+        this.getTrendingMovies();
+        break;
       default:
         this.getPopularMovies();
     }
@@ -70,6 +73,15 @@ export class MovieListComponent implements OnInit {
     this.Movies$ = this.movieService.getTopRatedMovies().subscribe(
       (r:any) => {
       this.movieList = this.shuffleList(r.results);
+    }
+    )
+  }
+
+  // Query popular movies from the movieDB and subscribe to it.
+  getTrendingMovies(){
+    this.Movies$ = this.movieService.getTrendingMovies().subscribe(
+      (r:any) => {
+      this.movieList = r.results;
     }
     )
   }

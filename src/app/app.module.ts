@@ -18,6 +18,7 @@ import { SharedModule } from './shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { WatchlistModule } from './watchlist/watchlist.module';
+import { SearchformComponent } from './shared/searchform/searchform.component';
 // import { MovieModule } from './modules/movie/movie.module';
 
 
@@ -26,7 +27,7 @@ import { WatchlistModule } from './watchlist/watchlist.module';
     AppComponent,
     HomepageComponent,
     MovieListComponent,
-    MovieDetailComponent
+    MovieDetailComponent,
     // say here what modules to "attach" to this module.
     // MovieModule
   ],

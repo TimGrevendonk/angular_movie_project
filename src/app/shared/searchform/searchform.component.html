@@ -1,0 +1,27 @@
+<div class="rounded p-4 mb-4 text-lg bg-red-200 text-red-800 border-2 border-red-300" *ngIf="errorMessage">
+  {{errorMessage}}
+</div>
+<form>
+  <!-- <form (ngSubmit)="onSubmit()" #categoryForm="ngForm"> -->
+  <div class="mb-6">
+    <label for="name" class="mb-2 text-sm font-medium text-soothYellow">Name</label>
+    <input type="name" id="name" name="name" [(ngModel)]="name"
+           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+           placeholder="Name" required >
+    <label for="name" class="block mb-2 text-sm font-medium text-soothYellow">Genres</label>
+    <select
+    [(ngModel)]="genre"
+    name="genre"
+    >
+      <option value="">-select a genre-</option>
+      <option *ngFor="let genre of genres" [value]="genre.id">
+        {{genre.name}}
+      </option>
+    </select>
+  </div>
+
+    <button type="submit" (click)="submit(); $event.preventDefault()"
+      class="text-black bg-soothYellow enabled:hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:opacity-75">
+      search
+    </button>
+</form>

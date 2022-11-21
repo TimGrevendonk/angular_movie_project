@@ -16,6 +16,7 @@ const routes: Routes = [
   {path: "searchlist",
     loadChildren: () => import("./searchlist/searchlist.module")
     .then(m => m.SearchlistModule)},
+
   {path: "movie/:id", component: MovieDetailComponent}
 
 ];

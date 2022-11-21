@@ -14,6 +14,11 @@ export class MovieService {
 
    }
 
+  getTrendingMovies(): Observable<Movie[]> {
+    // return timer(1, 10000).pipe(switchMap(() => this.httpClient.get<Movie[]>("https://api.themoviedb.org/3/movie/popular?api_key=0e4e46b4f7329bf9a0f26586ec5c3420")));
+    return this.httpClient.get<Movie[]>("https://api.themoviedb.org/3/trending/movie/day?api_key=" + environment.apiKey);
+  }
+
   getPopularMovies(): Observable<Movie[]> {
     // return timer(1, 10000).pipe(switchMap(() => this.httpClient.get<Movie[]>("https://api.themoviedb.org/3/movie/popular?api_key=0e4e46b4f7329bf9a0f26586ec5c3420")));
     return this.httpClient.get<Movie[]>("https://api.themoviedb.org/3/movie/popular?api_key=" + environment.apiKey);
@@ -29,5 +34,9 @@ export class MovieService {
 
   getMovieById(id: number): Observable<Movie> {
     return this.httpClient.get<Movie>("https://api.themoviedb.org/3/movie/" + id + "?api_key=" + environment.apiKey);
+  }
+
+  getMoviesByNameSearch(name: String): Observable<Movie[]> {
+    return this.httpClient.get<Movie[]>("https://api.themoviedb.org/3/search/movie?api_key=" + environment.apiKey + "&query=" + name);
   }
 }
