@@ -18,10 +18,11 @@ export class SearchformComponent implements OnInit {
 
   movies : Movie[] = [];
   @Output() movieNameSearchEvent = new EventEmitter<Movie[]>();
+  @Output() searchNameEvent = new EventEmitter<String>();
   movies$: Subscription = new Subscription();
 
   name!: string;
-  genre! : number[];
+  genre! : number;
 
   errorMessage: String = "";
 
@@ -43,22 +44,24 @@ export class SearchformComponent implements OnInit {
   }
 
   submit(): any {
+    this.searchNameEvent.emit(this.name);
     this.getMoviesByNameSearch();
   }
 
 
   // Query popular movies from the movieDB and subscribe to it.
   getMoviesByNameSearch(){
+    console.log("filtering does not work???", this.genre);
+
     this.movies$ = this.movieService.getMoviesByNameSearch(this.name).subscribe(
       (r:any) => {
-      this.movies = r.results,
+      this.movies = r.results;
+      if (this.genre) {
+      this.movies.filter((m) => m.genre_ids?.includes(this.genre));
+      }
       this.movieNameSearchEvent.emit(this.movies);
     }
     )
-    // FIX THE GENRE FILTER PLZ!!!
-    if (this.genre){
-      this.movies.filter((movie) => movie.genre_ids == this.genre)
-    }
   }
 
   // Query popular movies from the movieDB and subscribe to it.

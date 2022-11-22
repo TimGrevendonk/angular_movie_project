@@ -24,4 +24,6 @@ export class SearchlistComponent implements OnInit {
   getMovies($event:any){
     this.movies = $event
   }
+
+
 }

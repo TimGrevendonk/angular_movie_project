@@ -40,6 +40,14 @@ export class MovieListComponent implements OnInit {
 
   }
 
+
+  detail = (event:any, id: number) => {
+    event.stopPropagation();
+    this.router.navigate(["/movie", id]);
+    // console.log(this.movie);
+
+  }
+
   // Unsubscibe from subscriptio when the element is destroyed.
   ngOnDestroy(): void {
     this.Movies$.unsubscribe();
