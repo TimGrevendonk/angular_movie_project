@@ -18,12 +18,29 @@ export class LikedService {
   }
 
   postLikedMovie(likedMovie : Movie, rating : number, description: string): void {
-    this.httpClient.post<Liked>("http://localhost:8080/api/movie", {
+    this.httpClient.post<any>("http://localhost:8080/api/movie", {
       id: likedMovie.id,
       title: likedMovie.title,
       release_date: likedMovie.release_date,
       rating: rating,
       description: description,
+    }).subscribe({
+      error: error => {
+        console.log("post error", error);
+      }
+    })
+  }
+
+  deleteLikedMovie(likedMovie: Movie):void {
+    this.httpClient.delete<any[]>(`http://localhost:8080/api/movie/${likedMovie.id}`, {
+    }).subscribe({
+      next: data => {
+        console.log("delete succesfull");
+
+      },
+      error: error => {
+        console.log("delete error", error);
+      },
     })
   }
 }

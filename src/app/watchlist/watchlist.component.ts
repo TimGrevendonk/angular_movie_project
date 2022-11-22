@@ -35,7 +35,6 @@ export class WatchlistComponent implements OnInit {
     this.movies = $event
   }
 
-// TODO: !!! !!! !!! !!!
   // Query liked movies from the myDB and the query the movieDb with those results.
   getLikedMoviesIds(){
     this.movies$ = this.likedService.getlikedMovieIds().subscribe(
