@@ -6,41 +6,77 @@ import { Liked } from '../models/liked';
 import { Movie } from '../models/movie';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LikedService {
+  constructor(private httpClient: HttpClient) {}
 
-  constructor(private httpClient: HttpClient) { }
-
-
-  getlikedMovieIds(): Observable<Liked[]> {
-    return this.httpClient.get<Liked[]>("http://localhost:8080/api/movies");
+  getlikedMovies(): Observable<Liked[]> {
+    return this.httpClient.get<Liked[]>('http://localhost:8080/api/movies');
   }
 
-  postLikedMovie(likedMovie : Movie, rating : number, description: string): void {
-    this.httpClient.post<any>("http://localhost:8080/api/movie", {
-      id: likedMovie.id,
-      title: likedMovie.title,
-      release_date: likedMovie.release_date,
-      rating: rating,
-      description: description,
-    }).subscribe({
-      error: error => {
-        console.log("post error", error);
-      }
-    })
+  getlikedMovieById(id: number): Observable<Liked> {
+    return this.httpClient.get<Liked>('http://localhost:8080/api/movie/' + id);
   }
 
-  deleteLikedMovie(likedMovie: Movie):void {
-    this.httpClient.delete<any[]>(`http://localhost:8080/api/movie/${likedMovie.id}`, {
-    }).subscribe({
-      next: data => {
-        console.log("delete succesfull");
+  postLikedMovie(
+    likedMovie: Movie,
+    rating: number = 0,
+    description: string = '',
+    watched: boolean = false
+  ): void {
+    this.httpClient
+      .post<any>('http://localhost:8080/api/movie', {
+        id: likedMovie.id,
+        title: likedMovie.title,
+        release_date: likedMovie.release_date,
+        rating: rating,
+        description: description,
+        watched: watched,
+      })
+      .subscribe({
+        error: (error) => {
+          console.log('post error', error);
+        },
+      });
+  }
 
-      },
-      error: error => {
-        console.log("delete error", error);
-      },
-    })
+  // the delete is broken, is it from the java server or locally here???
+  deleteLikedMovie(id: number): void {
+    this.httpClient
+      .delete<any[]>(`http://localhost:8080/api/movie/${id}`, {})
+      .subscribe({
+        next: (data) => {
+          console.log('delete succesfull');
+        },
+        error: (error) => {
+          console.log('delete error', error);
+        },
+      });
+  }
+
+  patchLikedMovie(
+    likedMovie: Movie,
+    rating: number,
+    description: string,
+    watched: boolean
+  ): void {
+    this.httpClient
+      .patch<any[]>(`http://localhost:8080/api/movie/${likedMovie.id}`, {
+        id: likedMovie.id,
+        title: likedMovie.title,
+        release_date: likedMovie.release_date,
+        rating: rating,
+        description: description,
+        watched: watched,
+      })
+      .subscribe({
+        next: (data) => {
+          console.log('patch succesfull');
+        },
+        error: (error) => {
+          console.log('patch error', error);
+        },
+      });
   }
 }

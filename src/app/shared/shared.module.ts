@@ -13,8 +13,7 @@ import { SharedRoutingModule } from './shared-routing.module';
 import { WatchlistRoutingModule } from '../watchlist/watchlist-routing.module';
 import { ButtonComponent } from './button/button.component';
 import { SearchformComponent } from './searchform/searchform.component';
-
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -26,12 +25,13 @@ import { SearchformComponent } from './searchform/searchform.component';
     SearchformComponent,
     MovieComponent,
     SearchformComponent,
-        // MovieListComponent,
+    // MovieListComponent,
   ],
   imports: [
     FormsModule,
     SharedRoutingModule,
     CommonModule,
+    FontAwesomeModule,
     // FormfieldComponent,
   ],
   exports: [
@@ -44,6 +44,6 @@ import { SearchformComponent } from './searchform/searchform.component';
     SearchformComponent,
     FormsModule,
     // FormfieldComponent
-  ]
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -8,46 +8,44 @@ import { MovieService } from '../movie/movie.service';
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.css']
+  styleUrls: ['./button.component.css'],
 })
 export class ButtonComponent implements OnInit {
-  @Input() movie! : Movie;
+  @Input() movie!: Movie;
   @Input() liked!: Liked[];
   saved: boolean = false;
 
-  constructor(private movieService: MovieService, private likedService: LikedService,  private router: Router) {
-  }
+  constructor(
+    private movieService: MovieService,
+    private likedService: LikedService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    // this.checkSaved();
+    this.checkSaved();
   }
 
-  checkSaved():void{
-    console.log("hello");
-
-    if (this.liked.map(l => l)){
+  checkSaved(): void {
+    if (this.liked.filter((l) => l.id == this.movie.id).length == 0) {
       this.saved = true;
     }
   }
 
-  route(event:any) {
+  route(event: any) {
     event.stopPropagation();
 
     // this.router.navigate(["/searchlist"]);
-    console.log(this.movie);
-
   }
 
-
-  watch(event:any) : void {
+  save(event: any): void {
     event.stopPropagation();
-    this.likedService.postLikedMovie(this.movie, 0, "");
-    console.log("watch", this.movie);
+    this.likedService.postLikedMovie(this.movie, 0, '');
+    console.log('saved', this.movie);
   }
 
-  unwatch(event:any): void {
+  remove(event: any): void {
     event.stopPropagation();
-    this.likedService.deleteLikedMovie(this.movie)
+    this.likedService.deleteLikedMovie(this.movie.id);
+    console.log('removed', this.movie);
   }
-
 }

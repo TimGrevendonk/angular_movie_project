@@ -7,6 +7,10 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
 import { SearchlistComponent } from './searchlist/searchlist.component';
 import { NavigationbarComponent } from './shared/navigationbar/navigationbar.component';
+import {
+  FontAwesomeModule,
+  FaIconLibrary,
+} from '@fortawesome/angular-fontawesome';
 
 import { HttpClientModule } from '@angular/common/http';
 import { MovieComponent } from './shared/movie/movie.component';
@@ -20,7 +24,6 @@ import { CommonModule } from '@angular/common';
 import { WatchlistModule } from './watchlist/watchlist.module';
 import { SearchformComponent } from './shared/searchform/searchform.component';
 // import { MovieModule } from './modules/movie/movie.module';
-
 
 @NgModule({
   declarations: [
@@ -37,10 +40,11 @@ import { SearchformComponent } from './shared/searchform/searchform.component';
     HttpClientModule,
     FormsModule,
     SharedModule,
+    // add fontawesome to module -> then add the icon in the component.ts with faIconLibary injected (appComponent example)
+    FontAwesomeModule,
   ],
-  exports: [
-  ],
+  exports: [],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

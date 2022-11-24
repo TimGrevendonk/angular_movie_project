@@ -1,10 +1,15 @@
-
-<button *ngIf="saved" (click)="watch($event)"
-class="bottom-0 w-full bg-soothYellow py-1 md:py-2 active:bg-black active:text-soothYellow opacity-50 hover:opacity-100">
-  add to watched
+<button
+  *ngIf="saved"
+  (click)="save($event)"
+  class="bottom-0 w-full bg-soothYellow py-1 md:py-2 active:bg-black active:text-soothYellow opacity-50 hover:opacity-100"
+>
+  Save movie
 </button>
 
-<button *ngIf="!saved" (click)="unwatch($event)"
-class="bottom-0 w-full bg-soothYellow py-1 md:py-2 active:bg-black active:text-soothYellow opacity-50 hover:opacity-100">
-  remove from watched
+<button
+  *ngIf="!saved"
+  (click)="remove($event)"
+  class="bottom-0 w-full bg-soothYellow py-1 md:py-2 active:bg-black active:text-soothYellow opacity-50 hover:opacity-100"
+>
+  Remove movie
 </button>
