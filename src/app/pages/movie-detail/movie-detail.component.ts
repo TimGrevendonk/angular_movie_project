@@ -66,6 +66,7 @@ export class MovieDetailComponent implements OnInit {
 
   setDescription() {
     console.log('discription', this.description);
+    this.updateLikedMovie();
   }
 
   setRating(operator: string) {

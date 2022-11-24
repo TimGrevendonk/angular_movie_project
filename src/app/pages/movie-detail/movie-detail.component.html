@@ -36,8 +36,12 @@
   </div>
   <div class="text-black p-5 text-3xl flex flex-col justify-center">
     <!-- start description -->
-    <form (keyup.enter)="setDescription()">
+    <form (keyup.enter)="setDescription()" class="m-auto">
+      <p class="text-soothYellow opacity-80 py-1 md:py-2 m-auto justify-center">
+        description
+      </p>
       <input
+        (blur)="setDescription()"
         type="name"
         id="name"
         name="description"
@@ -45,14 +49,10 @@
         class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
         placeholder="description"
       />
-      <label
-        for="description"
-        class="block mb-2 text-sm font-medium text-soothYellow"
-      >
-        description
-      </label>
     </form>
-    <p>
+    <p
+      class="text-soothYellow opacity-70 py-3 md:py-5 px-5 my-3 outline outline-soothYellow rounded text-center"
+    >
       {{ description }}
     </p>
     <!-- end description -->
