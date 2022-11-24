@@ -7,46 +7,78 @@
   <div class="absolute w-full top-0 bg-black opacity-70 text-white text-center">
     <h5 class="">{{ movie.title }}</h5>
   </div>
-  <div class="bg-black">
-    <button
-      *ngIf="liked; else notLiked"
-      (click)="save($event)"
-      class="bottom-0 w-full bg-soothYellow py-1 md:py-2 active:bg-black active:text-soothYellow opacity-40 hover:opacity-80"
-    >
-      Save movie
-    </button>
-    <ng-template #notLiked>
-      <button
-        (click)="remove($event)"
-        class="bottom-0 w-full bg-soothYellow py-1 md:py-2 active:bg-black active:text-soothYellow opacity-50 hover:opacity-100"
-      >
-        Remove movie
-      </button>
-    </ng-template>
-  </div>
+  <app-button [movie]="movie" [liked]="liked"></app-button>
 </div>
 <div
   class="relative flex-none outline outline-0 outline-soothYellow bg-black md:mb-4"
 >
-  <p class="text-white p-5">
+  <p class="text-white p-5 space-x-1">
     {{ movie.overview }}
   </p>
-  <!-- start watched toggle button -->
-  <p class="text-black p-5 text-3xl">
+
+  <div class="text-black p-5 text-3xl flex justify-center">
+    <!-- start watched toggle button -->
     <button
       *ngIf="watched"
-      class="rounded bottom-0 w-1/3 bg-soothYellow py-1 md:py-2 active:bg-black active:text-soothYellow opacity-50 hover:opacity-100"
+      class="rounded bottom-0 w-1/2 bg-soothYellow mx-2 py-1 md:py-2 active:bg-black active:text-soothYellow opacity-50 hover:opacity-100"
       (click)="toggleWatched()"
     >
       watched <fa-icon icon="check" size="lg"></fa-icon>
     </button>
     <button
       *ngIf="!watched"
-      class="rounded bottom-0 w-1/3 bg-soothYellow py-1 md:py-2 active:bg-black active:text-soothYellow opacity-50 hover:opacity-100"
+      class="rounded bottom-0 w-1/2 bg-soothYellow mx-2 py-1 md:py-2 active:bg-black active:text-soothYellow opacity-50 hover:opacity-100"
       (click)="toggleWatched()"
     >
-      watch <fa-icon icon="plus" size="lg"></fa-icon>
+      watch <fa-icon icon="film" size="lg"></fa-icon>
     </button>
-  </p>
-  <!-- end watched toggle button -->
+    <!-- end watched toggle button -->
+  </div>
+  <div class="text-black p-5 text-3xl flex flex-col justify-center">
+    <!-- start description -->
+    <form (keyup.enter)="setDescription()">
+      <input
+        type="name"
+        id="name"
+        name="description"
+        [(ngModel)]="description"
+        class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
+        placeholder="description"
+      />
+      <label
+        for="description"
+        class="block mb-2 text-sm font-medium text-soothYellow"
+      >
+        description
+      </label>
+    </form>
+    <p>
+      {{ description }}
+    </p>
+    <!-- end description -->
+  </div>
+  <div class="text-black p-5 text-3xl flex flex-col justify-center">
+    <p class="text-soothYellow opacity-80 py-1 md:py-2 m-auto">
+      Personal rating:
+    </p>
+    <!-- start rating  -->
+    <div class="flex-row flex m-auto">
+      <button
+        class="rounded bottom-0 bg-soothYellow mx-2 px-3 py-1 md:py-2 active:bg-black active:text-soothYellow opacity-50 hover:opacity-100"
+        (click)="setRating('-')"
+      >
+        <fa-icon icon="minus" size="lg"></fa-icon>
+      </button>
+      <p class="text-soothYellow opacity-80 py-1 md:py-2 mx-2">
+        <span>{{ rating ? rating : 0 }}</span>
+      </p>
+      <button
+        class="rounded bottom-0 bg-soothYellow mx-2 px-3 py-1 md:py-2 active:bg-black active:text-soothYellow opacity-50 hover:opacity-100"
+        (click)="setRating('+')"
+      >
+        <fa-icon icon="plus" size="lg"></fa-icon>
+      </button>
+    </div>
+    <!-- start rating  -->
+  </div>
 </div>

@@ -12,7 +12,7 @@ import { MovieService } from 'src/app/shared/movie/movie.service';
 })
 export class MovieDetailComponent implements OnInit {
   movie!: Movie;
-  liked!: Liked;
+  liked: Liked[] = [];
   rating!: number;
   description!: string;
   watched!: boolean;
@@ -45,12 +45,12 @@ export class MovieDetailComponent implements OnInit {
   // fill the liked movie attribute.
   getLikedMovie(movieId: any) {
     let likedPlacehold = this.likedService.getlikedMovieById(+movieId) ?? null;
-
     if (likedPlacehold != null) {
       this.likedService
         .getlikedMovieById(+movieId)
         .subscribe((response: any) => {
-          (this.liked = response),
+          // add the liked movie to the array (array is needed for the app-button)
+          this.liked.push(response),
             (this.rating = response.rating),
             (this.description = response.description),
             (this.watched = response.watched),
@@ -64,12 +64,18 @@ export class MovieDetailComponent implements OnInit {
     }
   }
 
-  setDescritpion() {
-    console.log('setting description');
+  setDescription() {
+    console.log('discription', this.description);
   }
 
-  setRating() {
-    console.log('setting rating');
+  setRating(operator: string) {
+    if (operator == '-' && this.rating > 0) {
+      this.rating--;
+      this.updateLikedMovie();
+    } else if (operator == '+' && this.rating < 5) {
+      this.rating++;
+      this.updateLikedMovie();
+    }
   }
 
   toggleWatched() {
