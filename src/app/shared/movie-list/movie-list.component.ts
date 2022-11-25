@@ -9,43 +9,35 @@ import { Movie } from '../../core/models/movie';
 @Component({
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
-  styleUrls: ['./movie-list.component.css']
+  styleUrls: ['./movie-list.component.css'],
 })
 export class MovieListComponent implements OnInit {
+  // Input for wich movieList to querry.
   @Input() listType!: String;
+  // movielist is response from querries and given to its child elements.
   movieList!: Movie[];
+  // subscription is for whe nthe movies change, they will be updated.
   Movies$: Subscription = new Subscription();
 
-  constructor(private movieService : MovieService, private router: Router) {
-
-  }
-  // Initialize the component and load in the popularMovies list.
+  constructor(private movieService: MovieService, private router: Router) {}
+  // Initialize the component and load in the wanted list.
   ngOnInit(): void {
     switch (this.listType) {
-      case "popularMovies":
+      case 'popularMovies':
         this.getPopularMovies();
         break;
-      case "now playing":
+      case 'now playing':
         this.getPlayingMovies();
         break;
-      case "top rated":
+      case 'top rated':
         this.getTopRatedMovies();
         break;
-      case "trending":
+      case 'trending':
         this.getTrendingMovies();
         break;
       default:
         this.getPopularMovies();
     }
-
-  }
-
-
-  detail = (event:any, id: number) => {
-    event.stopPropagation();
-    this.router.navigate(["/movie", id]);
-    // console.log(this.movie);
-
   }
 
   // Unsubscibe from subscriptio when the element is destroyed.
@@ -53,45 +45,36 @@ export class MovieListComponent implements OnInit {
     this.Movies$.unsubscribe();
   }
 
-  // shuffle the list so it does not look ike there are duplicates (visually).
-  shuffleList(movieList: Movie[]){
+  // shuffle the list so it does not look ike there are duplicate rows (visually).
+  shuffleList(movieList: Movie[]) {
     return movieList.sort(() => Math.random() - 0.5);
   }
 
   // Query popular movies from the movieDB and subscribe to it.
-  getPopularMovies(){
-    this.Movies$ = this.movieService.getPopularMovies().subscribe(
-      (r:any) => {
+  getPopularMovies() {
+    this.Movies$ = this.movieService.getPopularMovies().subscribe((r: any) => {
       this.movieList = r.results;
-    }
-    )
+    });
   }
 
-  // Query popular movies from the movieDB and subscribe to it.
-  getPlayingMovies(){
-    this.Movies$ = this.movieService.getPlayingMovies().subscribe(
-      (r:any) => {
+  // Query playing movies from the movieDB and subscribe to it.
+  getPlayingMovies() {
+    this.Movies$ = this.movieService.getPlayingMovies().subscribe((r: any) => {
       this.movieList = this.shuffleList(r.results);
-    }
-    )
+    });
   }
 
-  // Query popular movies from the movieDB and subscribe to it.
-  getTopRatedMovies(){
-    this.Movies$ = this.movieService.getTopRatedMovies().subscribe(
-      (r:any) => {
+  // Query top rated movies from the movieDB and subscribe to it.
+  getTopRatedMovies() {
+    this.Movies$ = this.movieService.getTopRatedMovies().subscribe((r: any) => {
       this.movieList = this.shuffleList(r.results);
-    }
-    )
+    });
   }
 
-  // Query popular movies from the movieDB and subscribe to it.
-  getTrendingMovies(){
-    this.Movies$ = this.movieService.getTrendingMovies().subscribe(
-      (r:any) => {
+  // Query trending movies from the movieDB and subscribe to it.
+  getTrendingMovies() {
+    this.Movies$ = this.movieService.getTrendingMovies().subscribe((r: any) => {
       this.movieList = r.results;
-    }
-    )
+    });
   }
-
 }

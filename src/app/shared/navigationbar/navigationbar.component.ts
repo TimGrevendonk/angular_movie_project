@@ -4,29 +4,23 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-navigationbar',
   templateUrl: './navigationbar.component.html',
-  styleUrls: ['./navigationbar.component.css']
+  styleUrls: ['./navigationbar.component.css'],
 })
 export class NavigationbarComponent implements OnInit {
-  hamburgerOpen = false
+  // always start with the icon collapsed.
+  hamburgerOpen = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
+  // switch the hamburger icon state.
   toggleHamburger(): void {
     this.hamburgerOpen = !this.hamburgerOpen;
   }
-
+  // close the hamburger menu if it was open.
   onHamburgerItemClick() {
     if (this.hamburgerOpen) {
       this.hamburgerOpen = false;
     }
   }
-
-  navigateTo(path: string) {
-    this.hamburgerOpen = false;
-    this.router.navigate([path]);
-  }
-
 }

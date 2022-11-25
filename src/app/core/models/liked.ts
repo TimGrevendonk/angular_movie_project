@@ -1,3 +1,4 @@
+// The liked movie for the local database.
 export interface Liked {
   id: number;
   title: String;

@@ -14,6 +14,7 @@ import { WatchlistRoutingModule } from '../watchlist/watchlist-routing.module';
 import { ButtonComponent } from './button/button.component';
 import { SearchformComponent } from './searchform/searchform.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SliceTextPipe } from './pipes/slice-text.pipe';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SearchformComponent,
     MovieComponent,
     SearchformComponent,
+    SliceTextPipe,
     // MovieListComponent,
   ],
   imports: [

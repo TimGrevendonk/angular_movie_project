@@ -1,19 +1,38 @@
+<!-- the card (much like the movie.component but a bit other logic) -->
 <div class="relative flex-none outline outline-0 outline-soothYellow bg-black">
   <img
     src="https://image.tmdb.org/t/p/original{{ movie.backdrop_path }}"
     [alt]="movie.title"
     class="md:w-1/2 m-auto"
   />
-  <div class="absolute w-full top-0 bg-black opacity-70 text-white text-center">
+  <div
+    class="absolute w-full top-0 bg-black opacity-70 text-white text-center min-h-[6rem]"
+  >
     <h5 class="">{{ movie.title }}</h5>
   </div>
   <app-button [movie]="movie" [liked]="liked"></app-button>
 </div>
+<!-- the description with some extra info. -->
 <div
   class="relative flex-none outline outline-0 outline-soothYellow bg-black md:mb-4"
 >
+  <!-- overview / description -->
   <p class="text-white p-5 space-x-1">
     {{ movie.overview }}
+  </p>
+  <!-- Release date. -->
+  <p class="text-white p-1 px-5 space-x-1">
+    {{ movie.release_date ? "this movie has been released on: " : "" }}
+    <span class="text-soothYellow">
+      {{ movie.release_date ? movie.release_date : "" }}
+    </span>
+  </p>
+  <!-- tagline -->
+  <p class="text-white p-1 px-5 space-x-1">
+    {{ movie.tagline ? "this movie its tagine was:" : "" }}
+    <span class="text-soothYellow">
+      {{ movie.tagline ? movie.tagline : "" }}
+    </span>
   </p>
 
   <div class="text-black p-5 text-3xl flex justify-center">
@@ -35,33 +54,32 @@
     <!-- end watched toggle button -->
   </div>
   <div class="text-black p-5 text-3xl flex flex-col justify-center">
-    <!-- start description -->
-    <form (keyup.enter)="setDescription()" class="m-auto">
-      <p class="text-soothYellow opacity-80 py-1 md:py-2 m-auto justify-center">
-        description
+    <!-- start personal comment -->
+    <form (keyup.enter)="setDescription()" class="">
+      <p
+        class="text-soothYellow opacity-80 flex py-1 md:py-2 m-auto justify-center"
+      >
+        My comment
       </p>
-      <input
+      <!-- the text saves when entered or the mous unfocuses -->
+      <textarea
         (blur)="setDescription()"
+        (keyup.enter)="setDescription()"
         type="name"
         id="name"
         name="description"
         [(ngModel)]="description"
-        class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
+        class="bg-black w-full text-soothYellow opacity-70 p-3 px-5 md:py-5 my-3 outline outline-soothYellow rounded text-center scrollbar scrollbar-thumb-soothYellow scrollbar-track-black"
         placeholder="description"
-      />
+      ></textarea>
     </form>
-    <p
-      class="text-soothYellow opacity-70 py-3 md:py-5 px-5 my-3 outline outline-soothYellow rounded text-center"
-    >
-      {{ description }}
-    </p>
-    <!-- end description -->
+    <!-- end personal comment -->
   </div>
   <div class="text-black p-5 text-3xl flex flex-col justify-center">
     <p class="text-soothYellow opacity-80 py-1 md:py-2 m-auto">
       Personal rating:
     </p>
-    <!-- start rating  -->
+    <!-- start personal rating  -->
     <div class="flex-row flex m-auto">
       <button
         class="rounded bottom-0 bg-soothYellow mx-2 px-3 py-1 md:py-2 active:bg-black active:text-soothYellow opacity-50 hover:opacity-100"
@@ -69,8 +87,9 @@
       >
         <fa-icon icon="minus" size="lg"></fa-icon>
       </button>
+      <!-- rating text -->
       <p class="text-soothYellow opacity-80 py-1 md:py-2 mx-2">
-        <span>{{ rating ? rating : 0 }}</span>
+        <span>{{ rating ? rating : 0 }}</span> / 10
       </p>
       <button
         class="rounded bottom-0 bg-soothYellow mx-2 px-3 py-1 md:py-2 active:bg-black active:text-soothYellow opacity-50 hover:opacity-100"
@@ -79,6 +98,6 @@
         <fa-icon icon="plus" size="lg"></fa-icon>
       </button>
     </div>
-    <!-- start rating  -->
+    <!-- end personal rating  -->
   </div>
 </div>

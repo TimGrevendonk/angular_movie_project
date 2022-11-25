@@ -12,8 +12,11 @@ import { MovieService } from '../movie/movie.service';
   styleUrls: ['./button.component.css'],
 })
 export class ButtonComponent implements OnInit {
+  // the current movie to compare to the liked movie.
   @Input() movie!: Movie;
+  // the liked movie to compare with and have data from.
   @Input() liked!: Liked[];
+  // The state of this movie.
   isSaved: boolean = false;
 
   constructor(
@@ -29,29 +32,32 @@ export class ButtonComponent implements OnInit {
     }, 40);
   }
 
+  // check that the current movie is in the liked movies array.
   checkSaved(): void {
-    // check that the current movie is in the liked movies array.
     let ids: number[] = [];
-
+    // Fill the Array with liked movie ids.
     this.liked.forEach((l) => {
       ids.push(l.id);
     });
-    // if so: set the saved to true (because the movie is found in the array).
+    // Set saved to true (if the movie is found in the array).
     if (ids.includes(this.movie.id)) {
       this.isSaved = true;
     }
   }
 
+  // Switch the state of the movie and sent a querry according to that state.
   toggleSaved(event: any): void {
     event.stopPropagation();
     if (this.isSaved) {
+      // remove the movie from the local database along with its data.
       this.likedService.deleteLikedMovie(this.movie.id);
       console.log('removed', this.movie);
     } else {
+      // save the movie and set it a basic state.
       this.likedService.postLikedMovie(this.movie, 0, '');
       console.log('saved', this.movie);
     }
-    // set the state for event binding, it will only check on initialize.
+    // set the state for event binding (it sets only on initialize).
     this.isSaved = !this.isSaved;
   }
 }

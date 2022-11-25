@@ -10,15 +10,15 @@ import { Movie } from '../models/movie';
 })
 export class LikedService {
   constructor(private httpClient: HttpClient) {}
-
+  // All the liked movies stored locally.
   getlikedMovies(): Observable<Liked[]> {
     return this.httpClient.get<Liked[]>('http://localhost:8080/api/movies');
   }
-
+  // get a liked movie By ID.
   getlikedMovieById(id: number): Observable<Liked> {
     return this.httpClient.get<Liked>('http://localhost:8080/api/movie/' + id);
   }
-
+  // save the basic state of the movie, if values are not given it will have default zeros.
   postLikedMovie(
     likedMovie: Movie,
     rating: number = 0,
@@ -41,7 +41,7 @@ export class LikedService {
       });
   }
 
-  // the delete is broken, is it from the java server or locally here???
+  // delete the movie that is stored locally.
   deleteLikedMovie(id: number): void {
     this.httpClient
       .delete<any[]>(`http://localhost:8080/api/movie/${id}`, {})
@@ -54,7 +54,7 @@ export class LikedService {
         },
       });
   }
-
+  // Update the info of a liked movie, in a single function because patch "skips" empty values.
   patchLikedMovie(
     likedMovie: Movie,
     rating: number,

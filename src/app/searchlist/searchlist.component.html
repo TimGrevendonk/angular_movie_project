@@ -1,2 +1,5 @@
-<shared-searchform (movieNameSearchEvent)="getMovies($event)" ></shared-searchform>
+<!-- event bubbeling from the child to the parent. -->
+<shared-searchform
+  (movieNameSearchEvent)="getMovies($event)"
+></shared-searchform>
 <app-movie [movies]="movies"></app-movie>

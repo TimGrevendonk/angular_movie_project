@@ -13,6 +13,7 @@ import { MovieService } from '../shared/movie/movie.service';
   styleUrls: ['./watchlist.component.css'],
 })
 export class WatchlistComponent implements OnInit {
+  // all liked movies in the list, subscribed for change.
   movies: any = [];
   movies$: Subscription = new Subscription();
 
@@ -31,10 +32,6 @@ export class WatchlistComponent implements OnInit {
     this.movies$.unsubscribe();
   }
 
-  getLiked($event: any) {
-    this.movies = $event;
-  }
-
   // Query liked movies from the myDB and the query the movieDb with those results.
   getLikedMovies() {
     this.movies$ = this.likedService
@@ -43,7 +40,7 @@ export class WatchlistComponent implements OnInit {
         this.reQuerry(response);
       });
   }
-
+  // get the full movie from the API per local liked movie.
   reQuerry(res: Liked[]) {
     res.forEach((movie) =>
       this.movieService.getMovieById(movie.id).subscribe(

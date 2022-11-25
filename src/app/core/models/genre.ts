@@ -1,4 +1,5 @@
+// the genres (UNUSED)
 export interface Genre {
-  id: number,
-  name: String,
+  id: number;
+  name: String;
 }

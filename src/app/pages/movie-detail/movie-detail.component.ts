@@ -12,6 +12,7 @@ import { MovieService } from 'src/app/shared/movie/movie.service';
 })
 export class MovieDetailComponent implements OnInit {
   movie!: Movie;
+  // the (single) liked movie is put in an array for compatability with other components.
   liked: Liked[] = [];
   rating!: number;
   description!: string;
@@ -25,6 +26,7 @@ export class MovieDetailComponent implements OnInit {
 
   // get the ID of the url and fill the movies.
   ngOnInit(): void {
+    // get the ID from the url.
     const movieID = this.route.snapshot.paramMap.get('id');
     if (movieID != null) {
       this.getMovie(movieID);
@@ -32,7 +34,7 @@ export class MovieDetailComponent implements OnInit {
     }
   }
 
-  // fill the movie movie attribute.
+  // fill the movie array from the open source API.
   getMovie(movieId: any) {
     let moviePlacehold = this.movieService.getMovieById(+movieId) ?? null;
     if (moviePlacehold != null) {
@@ -42,7 +44,7 @@ export class MovieDetailComponent implements OnInit {
     }
   }
 
-  // fill the liked movie attribute.
+  // fill the liked movies from the local database.
   getLikedMovie(movieId: any) {
     let likedPlacehold = this.likedService.getlikedMovieById(+movieId) ?? null;
     if (likedPlacehold != null) {
@@ -53,40 +55,31 @@ export class MovieDetailComponent implements OnInit {
           this.liked.push(response),
             (this.rating = response.rating),
             (this.description = response.description),
-            (this.watched = response.watched),
-            // debug init of everything.
-            console.log('liked init', this.liked);
-          console.log('movie init', this.movie);
-          console.log('rating init', this.rating);
-          console.log('descritpion init', this.description);
-          console.log('watched init', this.watched);
+            (this.watched = response.watched);
         });
     }
   }
-
+  // Patch the description.
   setDescription() {
     console.log('discription', this.description);
     this.updateLikedMovie();
   }
-
+  // Patch the rating.
   setRating(operator: string) {
     if (operator == '-' && this.rating > 0) {
       this.rating--;
       this.updateLikedMovie();
-    } else if (operator == '+' && this.rating < 5) {
+    } else if (operator == '+' && this.rating < 10) {
       this.rating++;
       this.updateLikedMovie();
     }
   }
-
+  // Switch the state and Patch the watched state.
   toggleWatched() {
     this.watched = !this.watched;
     this.updateLikedMovie();
-    console.log('watched', this.watched);
   }
-
-  // yoh bruf fix the liked button that it switches.
-
+  // patch the whole liked movie in the local database with the current values.
   updateLikedMovie() {
     this.likedService.patchLikedMovie(
       this.movie,
@@ -94,19 +87,5 @@ export class MovieDetailComponent implements OnInit {
       this.description,
       this.watched
     );
-  }
-
-  save(event: any): void {
-    event.stopPropagation();
-    this.likedService.postLikedMovie(this.movie, 0, '', false);
-    console.log('liked', this.liked);
-    console.log('movie', this.movie);
-  }
-
-  remove(event: any): void {
-    event.stopPropagation();
-    this.likedService.deleteLikedMovie(this.movie.id);
-    console.log('liked', this.liked);
-    console.log('movie', this.movie);
   }
 }

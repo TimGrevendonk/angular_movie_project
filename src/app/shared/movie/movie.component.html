@@ -1,24 +1,45 @@
+<!-- show a message of no movies were found in the query -->
 <div *ngIf="!movies">
-  <p>no movies found.</p>
+  <p class="text-soothYellow">no movies found.</p>
 </div>
 
+<!-- Show a movie element per movie in the list. When a movie is clicked it will show its details. -->
 <div
   *ngFor="let movie of movies"
   (click)="detail($event, movie)"
   class="hover:cursor-pointer hover:opacity-80 relative flex-none outline outline-0 outline-soothYellow bg-black md:mb-4"
 >
+  <!-- the image folows sizing and "descides" the zise of the card, when there is none the div will have a minimun hight for the text. -->
   <img
     src="https://image.tmdb.org/t/p/original{{ movie.backdrop_path }}"
     [alt]="movie.title"
-    class="md:max-w-md m-auto"
+    class="md:max-w-md m-auto min-h-[6rem]"
   />
+  <!-- The title and overview in an overlayed box, the description is cut of with a pipe. -->
   <div class="absolute w-full top-0 bg-black opacity-70 text-white text-center">
     <h5 class="text-2xl">{{ movie.title }}</h5>
     <p>
       {{ movie.overview | snubText: 50 }}
     </p>
   </div>
-  <!-- fix this button that it displays right -> then add description and rating to the detail page -->
+  <!-- the release date and votes, also cut with a (different) pipe -->
+  <div
+    class="absolute w-full bottom-8 md:bottom-10 bg-black opacity-70 text-white px-3"
+  >
+    <p class="flex justify-between">
+      <span>
+        released
+        <span class="text-soothYellow">{{
+          movie.release_date | sliceText: 4
+        }}</span>
+      </span>
+      <span>
+        global votes
+        <span class="text-soothYellow">{{ movie.vote_average }}</span></span
+      >
+    </p>
+  </div>
+  <!-- The button to add the movie to list, with given parameters. -->
   <div class="bg-black">
     <app-button [movie]="movie" [liked]="liked"></app-button>
   </div>

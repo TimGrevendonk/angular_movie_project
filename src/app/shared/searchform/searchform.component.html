@@ -1,27 +1,42 @@
-<div class="rounded p-4 mb-4 text-lg bg-red-200 text-red-800 border-2 border-red-300" *ngIf="errorMessage">
-  {{errorMessage}}
-</div>
 <form>
-  <!-- <form (ngSubmit)="onSubmit()" #categoryForm="ngForm"> -->
-  <div class="mb-6">
-    <label for="name" class="mb-2 text-sm font-medium text-soothYellow">Name</label>
-    <input type="name" id="name" name="name" [(ngModel)]="name"
-           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-           placeholder="Name" required >
-    <label for="name" class="block mb-2 text-sm font-medium text-soothYellow">Genres</label>
-    <select
-    [(ngModel)]="genre"
-    name="genre"
-    >
-      <option value="">-select a genre-</option>
-      <option *ngFor="let genre of genres" [value]="genre.id">
-        {{genre.name}}
+  <!-- the search box -->
+  <div class="mb-6 items-center justify-center w-full md:w-1/2 p-2 m-auto">
+    <!-- input field for the name of a movie. -->
+    <label for="name" class="mb-2 text-sm font-medium text-soothYellow">
+      Movie name
+    </label>
+    <input
+      type="name"
+      id="name"
+      name="name"
+      [(ngModel)]="name"
+      class="w-full m-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5"
+      placeholder="Name"
+      required
+    />
+    <!-- error message -->
+    <div *ngIf="errorMessage" class="text-red-600">
+      {{ errorMessage }}
+    </div>
+    <!-- the year dropdown -->
+    <label for="name" class="mt-5 block text-sm font-medium text-soothYellow">
+      Movie release year
+    </label>
+    <select [(ngModel)]="year" name="year" class="w-1/4 text-center">
+      <option value="" selected>-select a year-</option>
+      <option *ngFor="let year of years" [value]="year">
+        {{ year }}
       </option>
     </select>
   </div>
-
-    <button type="submit" (click)="submit(); $event.preventDefault()"
-      class="text-black bg-soothYellow enabled:hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:opacity-75">
+  <!-- submit button -->
+  <div class="items-center justify-center w-full md:w-1/2 p-2 m-auto">
+    <button
+      type="submit"
+      (click)="submit(); $event.preventDefault()"
+      class="text-black bg-soothYellow mb-2 focus:outline-none font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center hover:opacity-70"
+    >
       search
     </button>
+  </div>
 </form>
